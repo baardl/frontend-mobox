@@ -12,21 +12,41 @@ class ShareprocProcesses extends Component {
 
 	handleSelect = e => {
 		const selected = e.target.value
-		this.props.test.setSelected(selected)
+		this.props.shareproc.setFetching(selected)
 	}
 
-	render() {
-		return <div>
+    fetchProcesses() {
+        this.props.shareproc.setFetching(true);
+    }
 
-			<h3>Shareproc processes</h3>
-			Loading: {this.props.shareproc.fetchingProcesses}<br/>
-			Processes:
-            <ul className="ProcessesList">
-                {this.props.shareproc.processes.map((process, i) =>
-                    <ProcessListRow key={i} process={process}/>
-                )}
-            </ul>
-			</div>
+	render() {
+
+        const isFetching = this.props.shareproc.fetchingProcesses;
+        if (isFetching) {
+
+            return (<div>
+
+                <button onClick={this.fetchProcesses.bind(this)}>Fetch processes again</button>
+                <h3>Shareproc processes</h3>
+
+                Loading.....<br/>
+            </div>);
+        } else {
+        	return (
+            <div>
+
+                <button onClick={this.fetchProcesses.bind(this)}>Fetch processes again</button>
+                <h3>Shareproc processes</h3>
+                Processes:
+                <ul className="ProcessesList">
+                    {this.props.shareproc.processes.map((process, i) =>
+                        <ProcessListRow key={i} process={process}/>
+                    )}
+                </ul>
+            </div>
+			);
+
+		}
 	}
 }
 

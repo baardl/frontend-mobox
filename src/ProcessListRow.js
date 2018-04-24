@@ -7,7 +7,7 @@ const ProcessListRow = ({process}) => {
   );
 };
 
-ProcessListRow.PropTypes = {
+ProcessListRow.propTypes = {
   process: PropTypes.object.isRequired
 };
 

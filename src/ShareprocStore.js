@@ -17,11 +17,12 @@ export default class SharprocStore {
         )
     }
 
-        // this.searchName = '';
-        // this.user = '';
-        // this.repos = [];
-        // this.fetchingData = false;
-    // }
+    setFetching(value) {
+        console.log("Set Fetching, ", value);
+        runInAction(() => {
+            this.fetchingProcesses = value
+        })
+    }
 
     async fetchProcesses(filter) {
         const url = `https://dev.shareproc.com/frontend/processes?filter=${filter}`;
@@ -40,13 +41,13 @@ export default class SharprocStore {
     searchForProcesses = async () => {
         console.log("search for processes. Filter: ", this.filter);
         // if (!this.filter) return;
-        this.fetchingData = true;
+        this.setFetching(true);
         const [processes] = await Promise.all([
             this.fetchProcesses(`${this.filter}`)
         ]);
         runInAction("Update State after fetching Github's Data", () => {
             this.processes = processes;
-            this.fetchingProcesses = false;
+            this.setFetching(false);
         });
     };
 }
@@ -55,6 +56,6 @@ decorate(SharprocStore, {
     filter:    observable.shallow,
     processes: observable.shallow,
     fetchingProcesses: observable.shallow,
-    fetchFromGithub: action.bound,
-    searchForProcesses: action.bound
+    searchForProcesses: action.bound,
+    setFetching: action.bound
 })
