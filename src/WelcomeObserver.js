@@ -5,26 +5,26 @@ import PropTypes from "prop-types"
 import {action, decorate} from "mobx"
 
 class WelcomeObserver extends Component {
-	componentDidMount() {
-		this.props.test.getSelected()
-	}
+    componentDidMount() {
+        this.props.test.getSelected()
+    }
 
-	render() {
-			return <div>
-				<h3>Observed</h3>
-				{this.props.test.selected}
-			</div>
+    render() {
+        return <div>
+            <h3>Observed</h3>
+            {this.props.test.selected}
+        </div>
 
-	}
+    }
 }
 
 WelcomeObserver.propTypes = {
-	test:  PropTypes.object.isRequired
+    test:  PropTypes.object.isRequired
 }
 
 decorate(WelcomeObserver, {
-	addEntry:    action.bound,
-	removeEntry: action.bound
+    addEntry:    action.bound,
+    removeEntry: action.bound
 })
 
 export default inject('test')(observer(WelcomeObserver))

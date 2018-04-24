@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Welcome from "./Welcome";
 import WelcomeObserver from "./WelcomeObserver";
+import ShareprocProcesses from "./ShareprocProcesses";
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         </p>
           <Welcome/>
           <WelcomeObserver/>
+          <ShareprocProcesses/>
       </div>
     );
   }
